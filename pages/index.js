@@ -22,7 +22,7 @@ export default function Home() {
         class: styles.editor,
       },
     },
-    extensions: [StarterKit, ChakraHeading],
+    extensions: [StarterKit, ChakraHeading, ChakraSign],
     content:
       "<chakra-heading><p>Hello World!</p></chakra-heading> <p>Helloooooo World!</p>",
   })
@@ -70,7 +70,10 @@ export default function Home() {
   }
 
   const clickedAddSignature = () => {
-    onOpen()
+    editor.commands.insertContent({
+      type: "ChakraSign",
+      attrs: {},
+    })
   }
 
   return (

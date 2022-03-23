@@ -21,7 +21,8 @@ import {
 } from "@chakra-ui/react"
 import SignaturePad from "react-signature-canvas"
 
-function ChakaraSign({ isOpen, onClose }) {
+function ChakraSign() {
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
   const initialRef = React.useRef() //useRef returns a mutable(liable to change) ref object whose .current property is initialized to the passed argument (initialValue).Reference of the componet that has focus on when the modal opens
   const finalRef = React.useRef() //receives focus when the modal closes.
   const [imageURL, setImageURL] = useState(null) // create a state that will contain the url
@@ -73,4 +74,26 @@ function ChakaraSign({ isOpen, onClose }) {
   )
 }
 
-export default ChakaraSign
+export default Node.create({
+  name: "ChakraSign",
+
+  group: "block",
+
+  content: "inline*",
+
+  parseHTML() {
+    return [
+      {
+        tag: "chakra-sign",
+      },
+    ]
+  },
+
+  renderHTML({ HTMLAttributes }) {
+    return ["chakra-sign", mergeAttributes(HTMLAttributes)]
+  },
+
+  addNodeView() {
+    return ReactNodeViewRenderer(ChakraSign)
+  },
+})
