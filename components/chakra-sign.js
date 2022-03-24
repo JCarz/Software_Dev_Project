@@ -204,8 +204,6 @@ export default Node.create({
   renderHTML({ HTMLAttributes }) {
     return ["chakra-sign", mergeAttributes(HTMLAttributes)]
   },
-{/*Tiptap editer requires this to referance the signature that is going to be saved
-and placed to the HTML editor */}
   addNodeView() {
     return ReactNodeViewRenderer(ChakraSign)
   },
