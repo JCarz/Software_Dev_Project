@@ -18,6 +18,8 @@ import {
   FormLabel,
   Progress,
   Button,
+  ModalFooter,
+  ButtonGroup,
 } from "@chakra-ui/react"
 import SignaturePad from "react-signature-canvas"
 
