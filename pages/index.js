@@ -6,7 +6,6 @@ import {
   VStack,
   Text,
   Input,
-  useDisclosure,
 } from "@chakra-ui/react"
 import { AddIcon } from "@chakra-ui/icons"
 import { useEditor, EditorContent } from "@tiptap/react"
@@ -17,14 +16,13 @@ import Layout from "../layouts/default-layout"
 import styles from "./editor.module.css"
 
 export default function Home() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
   const editor = useEditor({
     editorProps: {
       attributes: {
         class: styles.editor,
       },
     },
-    extensions: [StarterKit, ChakraHeading],
+    extensions: [StarterKit, ChakraHeading, ChakraSign],
     content:
       "<chakra-heading><p>Hello World!</p></chakra-heading> <p>Helloooooo World!</p>",
   })
@@ -72,12 +70,13 @@ export default function Home() {
   }
 
   const clickedAddSignature = () => {
-    onOpen()
+    editor.commands.insertContent({
+      type: "ChakraSign",
+      attrs: {},
+    })
   }
 
   return (
-    <> <ChakraSign isOpen={isOpen} onClose={onClose}></ChakraSign>
-
     <Layout>
       <Flex w="100%" h="100%">
         <Box h="100%" w="100%" bg="#FAFAFA" overflow="scroll">
@@ -103,12 +102,9 @@ export default function Home() {
             {newNodeButton("Paragraph", clickedAddParagraph)}
             {newNodeButton("Heading", clickedAddHeading)}
             {newNodeButton("Signature", clickedAddSignature)}
-            
           </VStack>
-          
         </Box>
       </Flex>
     </Layout>
-    </>
   )
 }
