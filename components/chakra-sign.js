@@ -17,7 +17,8 @@ import {
   Button,
   ModalFooter,
   ButtonGroup,
-  Box
+  Box,
+  FormErrorMessage
 } from "@chakra-ui/react"
 import SignaturePad from "react-signature-canvas"
 
@@ -77,13 +78,15 @@ function ChakraSign(props) {
           <ModalOverlay />
           <ModalContent>
             <ModalBody>
-              <FormControl>
+              <FormControl isRequired isInvalid={firstName === ""}>
                 <FormLabel>First Name</FormLabel>
                 <Input placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+                <FormErrorMessage>First Name is required.</FormErrorMessage>
               </FormControl>
-              <FormControl>
+              <FormControl isRequired isInvalid={title === ""}>
                 <FormLabel>Title</FormLabel>
                 <Input placeholder="Type Here" value={title} onChange={(e) => setTitle(e.target.value)}/>
+                <FormErrorMessage>Title is required.</FormErrorMessage>
               </FormControl>
               <FormControl>
                 <FormLabel>Company(optional)</FormLabel>
