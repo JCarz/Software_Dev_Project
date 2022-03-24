@@ -50,24 +50,30 @@ function ChakraSign() {
             <FormControl>
               <FormLabel>First Name</FormLabel>
               <Input placeholder="First name" />
+            </FormControl>
+            <FormControl>
               <FormLabel>Title</FormLabel>
               <Input placeholder="Type Here" />
+            </FormControl>
+            <FormControl>
               <FormLabel>Company(optional)</FormLabel>
               <Input placeholder="Type Here" />
-              <SignaturePad
-                ref={signatureCanvas}
-                canvasProps={{
-                  className: "signatureCanvas",
-                }}
-              />
-              <p>
-                <Progress size="xs" isIndeterminate hasStripe />
-                Waiting for <strong>Persons</strong> signature
-              </p>
-              <Button onClick={save}>Save</Button>
-              <Button onClick={clear}>Clear</Button>
             </FormControl>
+            <SignaturePad/>
+            <p>
+              <Progress size="xs" isIndeterminate hasStripe />
+              Waiting for <strong>Persons</strong> signature
+            </p>
           </ModalBody>
+          <ModalFooter justifyContent="space-between">
+            <ButtonGroup>
+              <Button colorScheme="red" onClick={Delete}>Delete</Button>
+            </ButtonGroup>
+            <ButtonGroup>
+              <Button colorScheme="green" onClick={Save}>Save</Button>
+              <Button onClick={Clear}>Clear</Button>
+            </ButtonGroup>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </NodeViewWrapper>
