@@ -1,23 +1,20 @@
 import { Node, mergeAttributes } from "@tiptap/core"
 import React, { useRef, useState } from "react"
 import {
-  ReactNodeViewRenderer,
   NodeViewWrapper,
   NodeViewContent,
+  ReactNodeViewRenderer,
 } from "@tiptap/react"
 import {
-  ChakraProvider,
   FormControl,
   Input,
   Modal,
   ModalOverlay,
   ModalBody,
   ModalContent,
-  ModalHeader,
-  useDisclosure,
   FormLabel,
   Progress,
-  Button,
+  Button
 } from "@chakra-ui/react"
 import SignaturePad from "react-signature-canvas"
 
@@ -53,6 +50,7 @@ function ChakaraSign({ isOpen, onClose }) {
               <Input placeholder="Type Here" />
               <FormLabel>Company(optional)</FormLabel>
               <Input placeholder="Type Here" />
+
               <SignaturePad
                 ref={signatureCanvas}
                 canvasProps={{
@@ -72,5 +70,4 @@ function ChakaraSign({ isOpen, onClose }) {
     </NodeViewWrapper>
   )
 }
-
 export default ChakaraSign
