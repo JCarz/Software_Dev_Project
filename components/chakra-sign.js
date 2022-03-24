@@ -36,7 +36,7 @@ function ChakraSign(props) {
 
   useEffect(() => {
     canvasRef.current?.fromData(signatureData);
-  }, [signatureData])
+  }, [isOpen, signatureData])
 
   const modalClose = () => {
 
@@ -64,7 +64,7 @@ function ChakraSign(props) {
   const Clear = () => {
     setSignatureData([]);
     setSignatureImg(null);
-    onClose();
+    setSignatureEnd(false);
   }
 
   return (
@@ -89,13 +89,20 @@ function ChakraSign(props) {
                 <FormLabel>Company(optional)</FormLabel>
                 <Input placeholder="Type Here" value={company} onChange={(e) => setCompany(e.target.value)}/>
               </FormControl>
-              <SignaturePad ref={canvasRef} onEnd={() => setSignatureEnd(true)}/>
-              {!signatureEnd && (
-                <p>
-                  <Progress size="xs" isIndeterminate hasStripe />
-                  Waiting for <strong>Persons</strong> signature
-                </p>
-              )}
+              <FormControl>
+                <FormLabel>Signature</FormLabel>
+                <Box border="1px" borderRadius="md" color="gray.200">
+                  <SignaturePad ref={canvasRef} onEnd={() => setSignatureEnd(true)} canvasProps={{ style: { width: "100%" }}}/>
+                </Box>
+                {!signatureEnd && (
+                  <Box mt="2">
+                    <p>
+                      <Progress size="xs" isIndeterminate hasStripe />
+                      Waiting for <strong>Persons</strong> signature
+                    </p>
+                  </Box>
+                )}
+              </FormControl>
             </ModalBody>
             <ModalFooter justifyContent="space-between">
               <ButtonGroup>
