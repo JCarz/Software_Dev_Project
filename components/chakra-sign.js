@@ -1,10 +1,16 @@
 import { Node, mergeAttributes } from "@tiptap/core"
+
 import React, { useRef, useState, useEffect } from "react"
 import {
   ReactNodeViewRenderer,
   NodeViewWrapper,
 } from "@tiptap/react"
 import {
+
+import React, { useRef, useState } from "react"
+import { ReactNodeViewRenderer, NodeViewWrapper } from "@tiptap/react"
+import {
+
   FormControl,
   Input,
   Modal,
@@ -22,6 +28,7 @@ import {
 } from "@chakra-ui/react"
 import SignaturePad from "react-signature-canvas"
 
+
 function ChakraSign(props) {
   const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
 
@@ -34,7 +41,11 @@ function ChakraSign(props) {
   const [signatureEnd, setSignatureEnd] = useState(false);
 
   const canvasRef = useRef();
-
+  {/*
+  Each input field holds a state that can be saved and retrieved
+  for error protection its best practice to set the state to null
+  or empty when starting up
+  */}
   useEffect(() => {
     canvasRef.current?.fromData(signatureData);
   }, [isOpen, signatureData])
@@ -51,7 +62,10 @@ function ChakraSign(props) {
     props.deleteNode()
     onClose();
   }
-
+  
+  {/*Signature modal holds props (which stands for properties)
+  object argument with data and returns a React element*/}
+  
   const noEmptyField = !canvasRef.current?.isEmpty() && firstName !== "" && title !== "";
 
   const Save = () => {
@@ -66,10 +80,29 @@ function ChakraSign(props) {
     setSignatureData([]);
     setSignatureImg(null);
     setSignatureEnd(false);
+
+    {/*Save and clear functionality. Save is set to a DataURL image with .png properties */}
+function ChakraSign() {
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true })
+  const signatureCanvas = useRef({})
+  const [signature, setSignature] = useState(null)
+  /**
+   * @return a funtion that uses the canvas ref to clear the canvas via a method given by react-signature-canvas
+   */
+  const clear = () => signatureCanvas.current.clear()
+  /**
+   * @returns a function that uses the canvas ref to trim the canvas from white space via a method given by react-signature-canvas and
+   * saves it in our state
+   */
+  const save = () => {
+    setSignature(
+      signatureCanvas.current.getTrimmedCanvas().toDataURL("image/png")
+    )
   }
 
   return (
     <NodeViewWrapper className="chakra-sign">
+
       <div>
         <Box p="2" border="1px" onClick={modalOpen}>
           { signatureImg ? <img src={signatureImg} alt="signature" /> : <p>Sign Here</p> }
@@ -119,6 +152,36 @@ function ChakraSign(props) {
           </ModalContent>
         </Modal>
       </div>
+{/*When the signature is clicked, the Modal, form control has working error checking for
+when the input field is empty, There is also styling added to signature border*/}
+      <img src={signature} />
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalBody>
+            <FormControl>
+              <FormLabel>First Name</FormLabel>
+              <Input placeholder="First name" />
+              <FormLabel>Title</FormLabel>
+              <Input placeholder="Type Here" />
+              <FormLabel>Company(optional)</FormLabel>
+              <Input placeholder="Type Here" />
+              <SignaturePad
+                ref={signatureCanvas}
+                canvasProps={{
+                  className: "signatureCanvas",
+                }}
+              />
+              <p>
+                <Progress size="xs" isIndeterminate hasStripe />
+                Waiting for <strong>Persons</strong> signature
+              </p>
+              <Button onClick={save}>Save</Button>
+              <Button onClick={clear}>Clear</Button>
+            </FormControl>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </NodeViewWrapper>
   )
 }
@@ -137,11 +200,12 @@ export default Node.create({
       },
     ]
   },
-
+  
   renderHTML({ HTMLAttributes }) {
     return ["chakra-sign", mergeAttributes(HTMLAttributes)]
   },
-
+{/*Tiptap editer requires this to referance the signature that is going to be saved
+and placed to the HTML editor */}
   addNodeView() {
     return ReactNodeViewRenderer(ChakraSign)
   },

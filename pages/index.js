@@ -102,9 +102,7 @@ export default function Home() {
             {newNodeButton("Paragraph", clickedAddParagraph)}
             {newNodeButton("Heading", clickedAddHeading)}
             {newNodeButton("Signature", clickedAddSignature)}
-
           </VStack>
-
         </Box>
       </Flex>
     </Layout>
