@@ -79,6 +79,17 @@ export default function Home() {
   return (
     <Layout>
       <Flex w="100%" h="100%">
+        <Box>
+          <Box bg="white" w="285px" h="100%" alignItems="start">
+            <VStack>
+              <Box>
+                <Heading padding="1em" size="md">
+                  Numbered Headings
+                </Heading>
+              </Box>
+            </VStack>
+          </Box>
+        </Box>
         <Box h="100%" w="100%" bg="#FAFAFA" overflow="scroll">
           <Box
             maxW="850"
@@ -91,6 +102,7 @@ export default function Home() {
             <EditorContent editor={editor} />
           </Box>
         </Box>
+
         <Box bg="white" w="285px" h="100%" alignItems="start">
           <VStack>
             <Box>
