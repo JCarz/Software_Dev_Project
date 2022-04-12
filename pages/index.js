@@ -5,7 +5,9 @@ import {
   HStack,
   VStack,
   Text,
-  Input,
+  ListItem,
+  OrderedList,
+  
 } from "@chakra-ui/react"
 import { AddIcon } from "@chakra-ui/icons"
 import { useEditor, EditorContent } from "@tiptap/react"
@@ -81,13 +83,17 @@ export default function Home() {
       <Flex w="100%" h="100%">
         <Box>
           <Box bg="white" w="285px" h="100%" alignItems="start">
-            <VStack>
-              <Box>
-                <Heading padding="1em" size="md">
-                  Numbered Headings
-                </Heading>
-              </Box>
-            </VStack>
+            <Box>
+              <Heading padding="1em" size="md">
+                Numbered Headings
+              </Heading>
+            </Box>
+            <OrderedList>
+              <ListItem>Lorem ipsum dolor sit amet</ListItem>
+              <ListItem>Consectetur adipiscing elit</ListItem>
+              <ListItem>Integer molestie lorem at massa</ListItem>
+              <ListItem>Facilisis in pretium nisl aliquet</ListItem>
+            </OrderedList>
           </Box>
         </Box>
         <Box h="100%" w="100%" bg="#FAFAFA" overflow="scroll">
