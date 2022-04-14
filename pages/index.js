@@ -7,9 +7,14 @@ import {
   Text,
   ListItem,
   OrderedList,
-  
+  Divider,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Button,
 } from "@chakra-ui/react"
-import { AddIcon } from "@chakra-ui/icons"
+import { AddIcon, ChevronDownIcon } from "@chakra-ui/icons"
 import { useEditor, EditorContent } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
 import ChakraHeading from "../components/chakra-heading"
@@ -89,11 +94,27 @@ export default function Home() {
               </Heading>
             </Box>
             <OrderedList>
-              <ListItem>Lorem ipsum dolor sit amet</ListItem>
-              <ListItem>Consectetur adipiscing elit</ListItem>
-              <ListItem>Integer molestie lorem at massa</ListItem>
-              <ListItem>Facilisis in pretium nisl aliquet</ListItem>
+              <ListItem>Columns</ListItem>
+              <Divider />
+              <ListItem>Headings</ListItem>
+              <Divider />
+              <ListItem>Paragraphs</ListItem>
+              <Divider />
+              <ListItem>
+                <a>Signatures</a>
+              </ListItem>
             </OrderedList>
+            <Menu>
+              <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                Select Components
+              </MenuButton>
+              <MenuList>
+                <MenuItem>Columns</MenuItem>
+                <MenuItem>Headings</MenuItem>
+                <MenuItem>Paragraphs</MenuItem>
+                <MenuItem>Signatures</MenuItem>
+              </MenuList>
+            </Menu>
           </Box>
         </Box>
         <Box h="100%" w="100%" bg="#FAFAFA" overflow="scroll">
